@@ -15,6 +15,11 @@ public class PopulateScrollPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Populate();
+    }
+
+    private void Populate()
+    {
         foreach (AudioDataScriptableObject item in audioDataObjects)
         {
             FrameUIAudioData newUIObject = Instantiate(audioDataUIObject, new Vector2(0, 0), Quaternion.identity);

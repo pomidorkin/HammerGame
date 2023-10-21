@@ -19,7 +19,7 @@ mergeInto(LibraryManager.library, {
   },
 
   RateGame: function() {
-    ysdk.feedback.canReview()
+ysdk.feedback.canReview()
         .then(({ value, reason }) => {
             if (value) {
                 ysdk.feedback.requestReview()
@@ -30,10 +30,11 @@ mergeInto(LibraryManager.library, {
                 console.log(reason)
             }
         })
+    
   },
 
   ShowAdv: function() {
-    ysdk.adv.showFullscreenAdv({
+ysdk.adv.showFullscreenAdv({
     callbacks: {
         onClose: function(wasShown) {
           // some action after close
@@ -43,17 +44,18 @@ mergeInto(LibraryManager.library, {
         }
     }
 })
+    
   },
 
   AddCoinsExtern: function(value) {
-    ysdk.adv.showRewardedVideo({
+ysdk.adv.showRewardedVideo({
     callbacks: {
         onOpen: () => {
           console.log('Video ad open.');
         },
         onRewarded: () => {
           console.log('Rewarded!');
-          myGameInstance.SendMessage("BalanceManager", "AddCoins", value);
+          myGameInstance.SendMessage("BalanceManager", "AddCoinsAndGoBack", value);
         },
         onClose: () => {
           console.log('Video ad closed.');
@@ -63,11 +65,12 @@ mergeInto(LibraryManager.library, {
         }
     }
 })
+    
 
   },
 
   UnblockTrackExtern: function() {
-    ysdk.adv.showRewardedVideo({
+ysdk.adv.showRewardedVideo({
     callbacks: {
         onOpen: () => {
           console.log('Video ad open.');
@@ -84,6 +87,7 @@ mergeInto(LibraryManager.library, {
         }
     }
 })
+    
 
   },
 

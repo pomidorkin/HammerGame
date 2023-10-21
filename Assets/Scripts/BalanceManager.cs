@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BalanceManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class BalanceManager : MonoBehaviour
     {
         if ((balance - unlockPrice) >= 0)
         {
-            balance -= unlockPrice;
+            Progress.Instance.playerInfo.coins -= unlockPrice;
             Progress.Instance.playerInfo.purchasedTracksId.Add(id);
             UpdateBalance();
             return true;
@@ -51,7 +52,7 @@ public class BalanceManager : MonoBehaviour
 
     public void UpdateBalance()
     {
-        Progress.Instance.playerInfo.coins = balance;
+        balance = Progress.Instance.playerInfo.coins;
         Progress.Instance.Save();
     }
 
@@ -62,8 +63,15 @@ public class BalanceManager : MonoBehaviour
 
     public void AddCoins(int val)
     {
-        balance += val;
+        Progress.Instance.playerInfo.coins += val;
         UpdateBalance();
+    }
+
+    public void AddCoinsAndGoBack(int val)
+    {
+        Progress.Instance.playerInfo.coins += val;
+        UpdateBalance();
+        SceneManager.LoadScene(0);
     }
 
     public int GetBalance()

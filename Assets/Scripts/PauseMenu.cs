@@ -23,14 +23,13 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-       SceneManager.LoadScene(0);
+        Progress.Instance.incompletedLevels++;
+        SceneManager.LoadScene(0);
     }
 
     public void AddBalanceGoToMenu()
     {
-        Progress.Instance.incompletedLevels++;
-        Progress.Instance.playerInfo.coins += 50;
-        Progress.Instance.Save();
+        BalanceManager.Instance.AddCoins(50);
         SceneManager.LoadScene(0);
     }
 

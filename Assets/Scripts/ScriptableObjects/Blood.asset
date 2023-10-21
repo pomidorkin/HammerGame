@@ -16,7 +16,9 @@ MonoBehaviour:
   bufferBand: 1
   triggerValue: 3
   timeLimit: 0.15
-  loudTrack: {fileID: 8300000, guid: 9128df7ea410f6548b78e82beed8a678, type: 3}
+  clip:
+    _id: 8f162f53-3091-4d3a-b71d-5cc9ab607139
+    _key: s4
   beats:
   - 28.155201
   - 28.530031
@@ -174,3 +176,4 @@ MonoBehaviour:
   - 207.76291
   difficulty: 4
   defaultTrack: 0
+  trackLength: 216.81633

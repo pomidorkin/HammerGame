@@ -22,17 +22,22 @@ public class Progress : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void LoadExtern();
 
+    [DllImport("__Internal")]
+    private static extern void ShowAdv();
+
     public static Progress Instance;
     public int completedLevels = 0;
     public int incompletedLevels = 0;
 
+    // Было Awake стало OnEnable
     private void Awake()
     {
         if (Instance == null)
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            LoadExtern();
+            //LoadExtern();
+            SetPlayerInfoLocal();
         }
         else
         {
@@ -40,10 +45,17 @@ public class Progress : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ShowAdv();
+    }
+
     public void Save()
     {
         string jsonString = JsonUtility.ToJson(playerInfo);
-        SaveExtern(jsonString);
+        //SaveExtern(jsonString);
+        PlayerPrefs.SetString("data", jsonString);
+        PlayerPrefs.Save();
     }
 
     public void SetPlayerInfo(string value)
@@ -57,5 +69,18 @@ public class Progress : MonoBehaviour
             playerInfo = new PlayerInfo();
             Save();
         }
+    }
+
+    public void SetPlayerInfoLocal()
+    {
+        playerInfo = JsonUtility.FromJson<PlayerInfo>(PlayerPrefs.GetString("data"));
+        Debug.Log(PlayerPrefs.GetString("data"));
+        if (playerInfo == null)
+        {
+            playerInfo = new PlayerInfo();
+            Save();
+        }
+        
+        
     }
 }

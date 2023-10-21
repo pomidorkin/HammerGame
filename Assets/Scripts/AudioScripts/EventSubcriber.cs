@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class EventSubcriber : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EventSubcriber : MonoBehaviour
     [SerializeField] TMP_Text scoreText;
     [SerializeField] ScoreManager scoreManager;
     [SerializeField] PauseMenu pauseMenu;
+    [SerializeField] Button[] gameCompletedButtons;
 
     //TEST
     int nailCounter = 0;
@@ -48,16 +50,17 @@ public class EventSubcriber : MonoBehaviour
         if (timeCounter >= trackLength && !gameEnd)
         {
             Progress.Instance.completedLevels++;
-            if (Progress.Instance.completedLevels >= 2)
-            {
-                ShowAdv();
-                Progress.Instance.incompletedLevels = 0;
-                Progress.Instance.completedLevels = 0;
-            }
             gameEnd = true;
             // Game end logic here, play add and enable pop up afterwards
             Debug.Log("Game End");
             levelCompletedPopUp.SetActive(true);
+
+            if (Progress.Instance.completedLevels >= 1)
+            {
+                StartCoroutine(EnableButtonsPlayAd());
+                Progress.Instance.incompletedLevels = 0;
+                Progress.Instance.completedLevels = 0;
+            }
 
             if (scoreManager.GetScore() > Progress.Instance.playerInfo.record)
             {
@@ -76,7 +79,8 @@ public class EventSubcriber : MonoBehaviour
     public void ShowRewardedAd(int val)
     {
         BalanceManager.Instance.AddCoinsExternMethod(val);
-        pauseMenu.BackToMainMenu();
+        //BalanceManager.Instance.UpdateBalance();
+        //pauseMenu.BackToMainMenu();
     }
 
     private void SpawnNailsFromList(float timeCounter)
@@ -86,6 +90,20 @@ public class EventSubcriber : MonoBehaviour
             nailCounter++;
             var newNail = Instantiate(nail, new Vector2(-9.19f, -2.2f), Quaternion.identity);
             newNail.transform.parent = movingBeam.transform;
+        }
+    }
+
+    private IEnumerator EnableButtonsPlayAd()
+    {
+        foreach (Button item in gameCompletedButtons)
+        {
+            item.interactable = false;
+        }
+        yield return new WaitForSeconds(1);
+        ShowAdv();
+        foreach (Button item in gameCompletedButtons)
+        {
+            item.interactable = true;
         }
     }
 }
