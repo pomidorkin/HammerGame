@@ -8,10 +8,11 @@ public class CountDownText : MonoBehaviour
     [SerializeField] TMP_Text countDownText;
     private float countDown;
     int i = 1;
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-        
+        i = 1;
+        countDownText.text = 3.ToString();
     }
 
     private void Update()
@@ -21,11 +22,13 @@ public class CountDownText : MonoBehaviour
         {
             countDown = 0;
             i++;
-            countDownText.text = i.ToString();
+            countDownText.text = (4-i).ToString();
             iTween.ScaleTo(gameObject, iTween.Hash("x", 2, "y", 2, "time", .2, "easetype", iTween.EaseType.easeInOutBack, "oncomplete", "goBackToOriginal"));
         }
         else if (countDown >= 1f && i >= 3)
         {
+            i = 1;
+            countDown = 0;
             gameObject.SetActive(false);
         }
     }

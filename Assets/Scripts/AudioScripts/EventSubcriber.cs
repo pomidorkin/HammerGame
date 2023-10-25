@@ -19,6 +19,7 @@ public class EventSubcriber : MonoBehaviour
     [SerializeField] ScoreManager scoreManager;
     [SerializeField] PauseMenu pauseMenu;
     [SerializeField] Button[] gameCompletedButtons;
+    [SerializeField] GameObject[] adNotificationCounters;
 
     //TEST
     int nailCounter = 0;
@@ -99,7 +100,15 @@ public class EventSubcriber : MonoBehaviour
         {
             item.interactable = false;
         }
-        yield return new WaitForSeconds(1);
+        foreach (GameObject item in adNotificationCounters)
+        {
+            item.SetActive(true);
+        }
+        yield return new WaitForSeconds(3);
+        foreach (GameObject item in adNotificationCounters)
+        {
+            item.SetActive(false);
+        }
         ShowAdv();
         foreach (Button item in gameCompletedButtons)
         {

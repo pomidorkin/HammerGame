@@ -47,4 +47,9 @@ public class VolumeManager : MonoBehaviour
 
 		volumePopup.SetActive(false);
 	}
+
+	public float GetVolume()
+    {
+		return volumeSlider.value;
+    }
 }

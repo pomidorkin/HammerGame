@@ -54,6 +54,7 @@ public class PurchasePopupManager : MonoBehaviour
     {
         Progress.Instance.playerInfo.purchasedTracksId.Add(id);
         Progress.Instance.Save();
+        Debug.Log("UnlockTrackSuccess, id: " + id + ", " + Progress.Instance.playerInfo.purchasedTracksId.ToString());
         populateScrollPanelScript.frameUIAudioDatas[id].DisableLockImage();
         adUnblockPopup.SetActive(false);
     }

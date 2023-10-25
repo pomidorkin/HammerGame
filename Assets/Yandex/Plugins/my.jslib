@@ -33,6 +33,20 @@ ysdk.feedback.canReview()
     
   },
 
+  CheckCanReview: function() {
+ysdk.feedback.canReview()
+        .then(({ value, reason }) => {
+            if (value) {
+              myGameInstance.SendMessage("Yandex", "EnableRateGameButton");
+              console.log('Can review');
+            } else {
+              console.log('Cannot review');
+                console.log(reason)
+            }
+        })
+    
+  },
+
   ShowAdv: function() {
 ysdk.adv.showFullscreenAdv({
     callbacks: {

@@ -36,8 +36,8 @@ public class Progress : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            //LoadExtern();
-            SetPlayerInfoLocal();
+            LoadExtern();
+            //SetPlayerInfoLocal();
         }
         else
         {
@@ -53,9 +53,9 @@ public class Progress : MonoBehaviour
     public void Save()
     {
         string jsonString = JsonUtility.ToJson(playerInfo);
-        //SaveExtern(jsonString);
-        PlayerPrefs.SetString("data", jsonString);
-        PlayerPrefs.Save();
+        SaveExtern(jsonString);
+        //PlayerPrefs.SetString("data", jsonString);
+        //PlayerPrefs.Save();
     }
 
     public void SetPlayerInfo(string value)
@@ -80,7 +80,5 @@ public class Progress : MonoBehaviour
             playerInfo = new PlayerInfo();
             Save();
         }
-        
-        
     }
 }

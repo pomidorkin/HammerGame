@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float delayLength = 1.0f;
     private AudioDataSelector audioDataSelector;
     [SerializeField] EventSubcriber eventSubcriber;
+    [SerializeField] VolumeManager volumeManager;
 
 
 
@@ -27,6 +28,8 @@ public class AudioManager : MonoBehaviour
         //mixer.SetFloat("MyExposedParam", -80.0f);
         //audioSource.PlayDelayed(delayLength);
         ConfigureAudioData();
+        AudioPauseHandler.Instance.PauseAudio();
+        AudioPauseHandler.Instance.UnpauseAudio();
     }
 
     public void SetVolume(float val)
@@ -73,13 +76,12 @@ public class AudioManager : MonoBehaviour
         //audioSource.PlayDelayed(delayLength);
         StartCoroutine(PlayDelayedSound(delayLength)); // test
 
-        SetVolume(1);
     }
 
     private IEnumerator PlayDelayedSound(float val)
     {
         yield return new WaitForSeconds(val);
         sourceAudio.Play(audioKey);
-        SetVolume(1);
+        SetVolume(volumeManager.GetVolume());
     }
 }

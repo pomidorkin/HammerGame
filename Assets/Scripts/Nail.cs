@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Nail : MonoBehaviour
 {
-    [SerializeField] GameObject[] sprites;
+    //[SerializeField] GameObject[] sprites;
     [SerializeField] GameObject straightNail;
     [SerializeField] BoxCollider2D collider;
     private bool missed = false;

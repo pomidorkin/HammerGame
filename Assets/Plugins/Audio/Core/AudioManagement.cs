@@ -11,10 +11,17 @@ namespace Plugins.Audio.Core
         public static AudioManagement Instance { get; private set; }
         public bool CanDebug => _configuration.CanDebug;
 
+        public delegate void AllTracksLoaded(); // TEST
+        public event AllTracksLoaded OnAllTrackLoaded; // TEST
+
         private Dictionary<string, AudioClip> _cechAudio = new Dictionary<string, AudioClip>();
         private AudioConfiguration _configuration;
         private AudioDatabase _database;
-        
+
+        private int trackAmount; // TEST
+        private int loadedTracks; // TEST
+        public bool loadingCompleted = false; // TEST
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Init()
         {
@@ -72,7 +79,7 @@ namespace Plugins.Audio.Core
             
             return;
 #endif
-
+            trackAmount = _database.Items.Count;
             foreach (AudioData audioData in _database.Items)
             {
                 if (audioData.Preload == false)
@@ -101,6 +108,12 @@ namespace Plugins.Audio.Core
                     result?.Invoke(audioClip);
                     
                     Log("Audio clip loaded: " + key + " time: " + (Time.time - startTime));
+                    loadedTracks++;
+                    if (loadedTracks >= trackAmount)
+                    {
+                        loadingCompleted = true;
+                        OnAllTrackLoaded();
+                    }
                 }
             }
         }

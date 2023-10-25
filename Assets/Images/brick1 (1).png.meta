@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 782d56976efb67a45b5333165d6b0fca
+guid: 3ed50ef5a8dbfab499f8f4ab8bba3960
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4759078593128700833
-    second: plank2_0
+      213: -2706591019357309359
+    second: brick1 (1)_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plank2_0
+      name: brick1 (1)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 600
-        height: 95
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f54e566fb3b54fdb0800000000000000
-      internalID: -4759078593128700833
+      spriteID: 156f1fadec1407ad0800000000000000
+      internalID: -2706591019357309359
       vertices: []
       indices: 
       edges: []
