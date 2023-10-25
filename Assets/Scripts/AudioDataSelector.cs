@@ -10,7 +10,6 @@ public class AudioDataSelector : MonoBehaviour
     [SerializeField] public AudioDataScriptableObject[] audioDataObjects;
     public int selectedAudioData = 0;
 
-
     private void Awake()
     {
         if (Instance == null)
